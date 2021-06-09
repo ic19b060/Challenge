@@ -22,8 +22,10 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-    public Task createTask(LocalDateTime updatedAt,LocalDateTime dueDate,LocalDateTime resolvedAT,String title ,String description,Integer priority, String status){
-        return taskRepository.save(new Task(UUID.randomUUID(),LocalDateTime.now(), updatedAt,dueDate,resolvedAT,title,description, priority, status));
+    public Task createTask(LocalDateTime updatedAt,LocalDateTime dueDate,LocalDateTime resolvedAT,String title
+            ,String description,Integer priority, String status){
+        return taskRepository.save(new Task(UUID.randomUUID(),LocalDateTime.now(), updatedAt,dueDate,
+                resolvedAT,title,description, priority, status));
     }
 
     public List<Task> findallTasks(){
@@ -31,7 +33,7 @@ public class TaskService {
     }
 
     public Optional<Task> getById(UUID id) {
-        return taskRepository.findById(id);
+         return taskRepository.findById(id);
     }
 
     public void deleteTask (UUID id){
@@ -44,18 +46,22 @@ public class TaskService {
 
     public Task updateTask(TaskDTO taskDTO) {
         Task taskToUpdate = modelMapper.map(taskDTO, Task.class);
-        Task oldtask;
+
+        if (taskToUpdate.getId() == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        Task oldTask;
         try {
-             oldtask = taskRepository.findById(taskToUpdate.getId()).orElseThrow(
-                    () -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                            String.format("Task not found"))
+             oldTask = taskRepository.findById(taskToUpdate.getId()).orElseThrow(
+                    () -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Task not found"))
             );
         } catch (IllegalArgumentException e) {
             log.error("Cannot parse id from string to UUID");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        taskToUpdate.setCreatedAt(oldtask.getCreatedAt());
+        taskToUpdate.setCreatedAt(oldTask.getCreatedAt());
         taskToUpdate.setUpdatedAt(LocalDateTime.now());
         return taskRepository.save(taskToUpdate);
     }

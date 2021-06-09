@@ -1408,7 +1408,7 @@ true posix/WET
 false posix/Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1623154105</StartupTime>
+      <StartupTime>1623180486</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>12379</ObjectId>
@@ -1418,7 +1418,7 @@ true posixrules
     <database id="3" parent="1" name="sample">
       <ObjectId>16384</ObjectId>
       <Owner>sample</Owner>
-      <IntrospectionStateNumber>867</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1066</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <role id="4" parent="1" name="sample">
@@ -1446,7 +1446,7 @@ true posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>570</StateNumber>
       <Owner>sample</Owner>
-      <IntrospectionStateNumber>868</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1067</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="8" parent="3" name="btree">
@@ -1493,6 +1493,7 @@ true posixrules
     <language id="18" parent="3" name="sql"/>
     <table id="19" parent="7" name="task">
       <ObjectId>16385</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>sample</Owner>
       <StateNumber>866</StateNumber>
     </table>

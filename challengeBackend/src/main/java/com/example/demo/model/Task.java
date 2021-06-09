@@ -12,8 +12,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 public class Task {
@@ -54,5 +54,4 @@ public class Task {
     @Column
     private String status;
 
-
-}
+  }
